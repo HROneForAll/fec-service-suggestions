@@ -14,15 +14,7 @@ let homeSchema = mongoose.Schema({
 let Home = mongoose.model('suggestions', homeSchema);
 
 let save = (obj) => {
-  let newHome = new Home({
-    id: obj.id,
-    houseImg: obj.house_img,
-    houseBeds: obj.house_beds,
-    houseName: obj.house_name,
-    housePrice: obj.house_price,
-    houseStars: obj.house_stars,
-    reviewCount: obj.review_count,
-  });
+  let newHome = new Home(obj);
   newHome.save((err, res) => {
     if (err) {
       console.log(err);
@@ -39,5 +31,7 @@ let find = () => {
   });
 };
 
-module.exports.find = find;
-module.exports.save = save;
+module.exports = {
+  find,
+  save
+};
