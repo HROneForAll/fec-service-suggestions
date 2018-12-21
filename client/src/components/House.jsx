@@ -12,6 +12,7 @@ class House extends React.Component {
             <img id='roomPic' src={this.props.house.suggestions.houseImg}/>
           </div>
           <div className='verified'>
+            <img src="plus.png"/>
             {this.props.house.suggestions.houseBeds}
           </div>
           <div>
@@ -21,7 +22,7 @@ class House extends React.Component {
             {this.props.house.suggestions.housePrice}
           </div>
           <div>
-            {this.props.house.suggestions.houseStars} {this.props.house.suggestions.reviewCount}
+            <img src="/stars.png"/> {this.props.house.suggestions.reviewCount}
           </div>
         </div>
       </a>
