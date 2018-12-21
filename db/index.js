@@ -2,13 +2,19 @@ const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/airBNB');
 
 let homeSchema = mongoose.Schema({
-  id: Number,
-  houseImg: String,
-  houseBeds: String,
-  houseName: String,
-  housePrice: String,
-  houseStars: Number,
-  reviewCount: Number,
+  id: {
+    type: Number,
+    min: 1,
+    max: 100,
+    unique: true
+  },
+  suggestions: Object
+  // houseImg: String,
+  // houseBeds: String,
+  // houseName: String,
+  // housePrice: String,
+  // houseStars: Number,
+  // reviewCount: Number,
 });
 
 let Home = mongoose.model('suggestions', homeSchema);
