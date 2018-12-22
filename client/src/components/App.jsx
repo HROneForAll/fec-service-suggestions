@@ -6,11 +6,22 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      houses: [],
+      houses: [{id: 100,
+        suggestions:
+          [{ suggestionId: 1,
+            houseImg: 'http://lorempixel.com/240/160/city/100',
+            houseBeds: 'VERIFIED - 2 BEDS',
+            houseName: 'Corrupti Facere Facere',
+            housePrice: '$257 per night',
+            houseStars: 2,
+            reviewCount: 257 
+          }]
+      }],
       moreRevealed: false
     };
     this.toggleMoreHomes = this.toggleMoreHomes.bind(this);
   }
+  
   componentDidMount() {
     this.getHomes(); 
   }
