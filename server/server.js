@@ -15,6 +15,17 @@ app.get('/suggestions', function(req, res) {
     });
 });
 
+// app.get('/suggestions/:id', function(req, res) {
+// 	let id = req.params.id
+//   Promise.resolve(db.find({id: id}))
+//     .then((results) => {
+//     	console.log('server', results)
+//       res.status(200).send(results);
+//     }).catch((error) => {
+//       console.log(error);
+//     });
+// });
+
 
 const port = 3050;
 app.listen(port, () => {

@@ -12,16 +12,16 @@ class HousesList extends React.Component {
     return (
       <div>
         <div className="HousesList">
-          {this.props.state.houses.slice(0, 4).map((house, index) => 
+          {this.props.state.houses[0].suggestions.slice(0, 4).map((house, index) => 
             <House house={house} key={index}/>
           )}
         </div>
         {this.props.state.moreRevealed ? 
           <div>
-            <div className="HousesList">{this.props.state.houses.slice(4, 8).map((house, index) => 
+            <div className="HousesList">{this.props.state.houses[0].suggestions.slice(4, 8).map((house, index) => 
               <House house={house} key={index}/>)}
             </div>
-            <div className="HousesList">{this.props.state.houses.slice(8, 12).map((house, index) => 
+            <div className="HousesList">{this.props.state.houses[0].suggestions.slice(8, 12).map((house, index) => 
               <House house={house} key={index}/>)}
             </div>
           </div>

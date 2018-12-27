@@ -9,20 +9,20 @@ class House extends React.Component {
       <a href='#' id='info'>
         <div>
           <div className='img_container'>
-            <img id='roomPic' src={this.props.house.suggestions.houseImg}/>
+            <img id='roomPic' src={this.props.house.houseImg}/>
           </div>
           <div className='verified'>
             <img src="plus.png"/>
-            {this.props.house.suggestions.houseBeds}
+            {this.props.house.houseBeds}
           </div>
           <div>
-            <strong>{this.props.house.suggestions.houseName}</strong>
+            <strong>{this.props.house.houseName}</strong>
           </div>
           <div>
-            {this.props.house.suggestions.housePrice}
+            {this.props.house.housePrice}
           </div>
           <div>
-            <img src="/stars.png"/> {this.props.house.suggestions.reviewCount}
+            <img src="/stars.png"/> {this.props.house.reviewCount}
           </div>
         </div>
       </a>

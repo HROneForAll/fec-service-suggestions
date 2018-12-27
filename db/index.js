@@ -9,12 +9,6 @@ let homeSchema = mongoose.Schema({
     unique: true
   },
   suggestions: Object
-  // houseImg: String,
-  // houseBeds: String,
-  // houseName: String,
-  // housePrice: String,
-  // houseStars: Number,
-  // reviewCount: Number,
 });
 
 let Home = mongoose.model('suggestions', homeSchema);
