@@ -13,7 +13,7 @@ let homeSchema = mongoose.Schema({
 
 let Home = mongoose.model('suggestions', homeSchema);
 
-let save = (obj) => {
+let saveHome = (obj) => {
   let newHome = new Home(obj);
   newHome.save((err, res) => {
     if (err) {
@@ -25,13 +25,13 @@ let save = (obj) => {
 };
 
 
-let find = () => {
+let findHome = (homeID) => {
   return new Promise((resolve, reject) => {
-    resolve(Home.find().sort({id: 1}));
+    resolve(Home.find({id: homeID}));
   });
 };
 
 module.exports = {
-  find,
-  save
+  findHome,
+  saveHome
 };
