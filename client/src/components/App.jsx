@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import HousesList from './HousesList.jsx';
+import FavoritesModal from './FavoritesModal.jsx';
+import { Container, Header, GlobalStyle } from './Styled_Components/styling.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -17,17 +19,22 @@ class App extends React.Component {
             reviewCount: 257 
           }]
       }],
-      moreRevealed: false
+      moreRevealed: false,
+      showModal: false,
+      showCreateList: false
     };
     this.toggleMoreHomes = this.toggleMoreHomes.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
+    this.toggleList = this.toggleList.bind(this);
   }
   
   componentDidMount() {
-    this.getHomes(); 
+    this.getHomes(1); 
   }
-  getHomes() {
-    axios.get('/suggestions')
+  getHomes(num) {
+    axios.get(`/homes/${num}/suggestions`)
       .then((data) => {
+        console.log(data.data)
         this.setState({houses: data.data});
       })
       .catch((error) => {
@@ -37,12 +44,21 @@ class App extends React.Component {
   toggleMoreHomes() {
     this.setState({moreRevealed: !this.state.moreRevealed});
   }
+  toggleModal () {
+    this.setState({showModal: !this.state.showModal})
+  }
+  toggleList () {
+    this.setState({showCreateList: !this.state.showCreateList})
+  }
+
   render() {
     return (
-      <div>
-        <h1>Other highly rated homes</h1>
-        <HousesList toggle={this.toggleMoreHomes} state={this.state}/>
-      </div>
+      <Container>
+        <FavoritesModal toggleModal={this.toggleModal} showModal={this.state.showModal} toggleList={this.toggleList} showCreateList={this.state.showCreateList}/>
+        <Header>Other highly rated homes</Header>
+        <HousesList toggleHomes={this.toggleMoreHomes} toggleModal={this.toggleModal} state={this.state}/>
+      <GlobalStyle />
+      </Container>
     );
   }
 }
