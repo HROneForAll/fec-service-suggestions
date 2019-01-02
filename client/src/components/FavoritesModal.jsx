@@ -5,14 +5,14 @@ import ModalAddList from './ModalAddList.jsx';
 
 class FavoritesModal extends React.Component {
   constructor(props) {
-  	super(props);
-  	this.toggleModal = this.toggleModal.bind(this);
+    super(props);
+    this.toggleModal = this.toggleModal.bind(this);
   }
   toggleModal() {
-  	this.props.toggleModal()
+    this.props.toggleModal();
   }
   render() {
-		const Modal = styled.div`
+    const Modal = styled.div`
 			display: ${this.props.showModal ? 'block' : 'none'};
 			position: fixed;
 			z-index: 1;
@@ -23,20 +23,20 @@ class FavoritesModal extends React.Component {
 			overflow: auto;
 			background-color: rgba(250, 250, 250, 0.8);
     `;
-  	return(
-  		<Modal>
-  		  <ModalContent >
-  		    <CloseModal onClick={this.toggleModal}>&#x2715;</CloseModal>
-  		    <div>
-  		      <ModalHeader>Save to list</ModalHeader>
-  		      {this.props.showCreateList
-  		      	? <ModalAddList />
-  		      	: <CreateList onClick={this.props.toggleList}>Create New List</CreateList>
-  		      }
-  		    </div>
-  		  </ModalContent>  
-  		</Modal>
-  	)
+    return (
+      <Modal>
+        <ModalContent >
+          <CloseModal onClick={this.toggleModal}>&#x2715;</CloseModal>
+          <div>
+            <ModalHeader>Save to list</ModalHeader>
+            {this.props.showCreateList
+              ? <ModalAddList />
+              : <CreateList onClick={this.props.toggleList}>Create New List</CreateList>
+            }
+          </div>
+        </ModalContent>  
+      </Modal>
+    );
   }
 }
 
