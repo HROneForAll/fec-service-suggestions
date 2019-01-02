@@ -34,7 +34,6 @@ class App extends React.Component {
   getHomes(num) {
     axios.get(`/homes/${num}/suggestions`)
       .then((data) => {
-        console.log(data.data)
         this.setState({houses: data.data});
       })
       .catch((error) => {
@@ -45,10 +44,10 @@ class App extends React.Component {
     this.setState({moreRevealed: !this.state.moreRevealed});
   }
   toggleModal () {
-    this.setState({showModal: !this.state.showModal})
+    this.setState({showModal: !this.state.showModal});
   }
   toggleList () {
-    this.setState({showCreateList: !this.state.showCreateList})
+    this.setState({showCreateList: !this.state.showCreateList});
   }
 
   render() {
@@ -57,7 +56,7 @@ class App extends React.Component {
         <FavoritesModal toggleModal={this.toggleModal} showModal={this.state.showModal} toggleList={this.toggleList} showCreateList={this.state.showCreateList}/>
         <Header>Other highly rated homes</Header>
         <HousesList toggleHomes={this.toggleMoreHomes} toggleModal={this.toggleModal} state={this.state}/>
-      <GlobalStyle />
+        <GlobalStyle />
       </Container>
     );
   }
