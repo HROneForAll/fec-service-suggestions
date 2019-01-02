@@ -1,32 +1,34 @@
 import React from 'react';
 import House from './House.jsx';
+import { HousingList, ShowMoreHomes } from './Styled_Components/styling.jsx';
+
 
 class HousesList extends React.Component {
   constructor(props) {
     super(props);
   }
-  toggle() {
-    this.props.toggle();
+  toggleMoreHomes() {
+    this.props.toggleHomes();
   }
   render() {
     return (
       <div>
-        <div className="HousesList">
+        <HousingList>
           {this.props.state.houses[0].suggestions.slice(0, 4).map((house, index) => 
-            <House house={house} key={index}/>
+            <House house={house} key={index} toggleModal={this.props.toggleModal}/>
           )}
-        </div>
-        {this.props.state.moreRevealed ? 
-          <div>
-            <div className="HousesList">{this.props.state.houses[0].suggestions.slice(4, 8).map((house, index) => 
+        </HousingList>
+        {this.props.state.moreRevealed 
+          ? <div>
+            <HousingList>{this.props.state.houses[0].suggestions.slice(4, 8).map((house, index) => 
               <House house={house} key={index}/>)}
-            </div>
-            <div className="HousesList">{this.props.state.houses[0].suggestions.slice(8, 12).map((house, index) => 
+            </HousingList>
+            <HousingList>{this.props.state.houses[0].suggestions.slice(8, 12).map((house, index) => 
               <House house={house} key={index}/>)}
-            </div>
+            </HousingList>
           </div>
           : 
-          <a href="#" id="displayMore" className="verified" onClick={this.toggle.bind(this)}>Show more homes</a>
+          <ShowMoreHomes onClick={this.toggleMoreHomes.bind(this)}>Show more homes</ShowMoreHomes>
         }
       </div>
     );

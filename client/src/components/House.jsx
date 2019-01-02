@@ -1,31 +1,35 @@
 import React from 'react';
+import { 
+  HouseInfo, VerifiedText, PlusText,
+  BedText, HouseName, HousePrice, 
+  NumberOfReviews, ImgContainer, HeartPicture 
+} from './Styled_Components/styling.jsx';
 
 class House extends React.Component {
   constructor(props) {
     super(props);
+    this.toggleModal = this.toggleModal.bind(this);
+  }
+  toggleModal () {
+    this.props.toggleModal();
   }
   render() {
     return (
-      <a href='#' id='info'>
-        <div>
-          <div className='img_container'>
-            <img id='roomPic' src={this.props.house.houseImg}/>
-          </div>
-          <div className='verified'>
-            <img src="plus.png"/>
-            {this.props.house.houseBeds}
-          </div>
-          <div>
-            <strong>{this.props.house.houseName}</strong>
-          </div>
-          <div>
-            {this.props.house.housePrice}
-          </div>
-          <div>
-            <img src="/stars.png"/> {this.props.house.reviewCount}
-          </div>
-        </div>
-      </a>
+      <HouseInfo >
+        <ImgContainer>
+          <HeartPicture><img onClick={this.toggleModal} src='Red.png'/></HeartPicture>
+          <img id='roomPic' src={this.props.house.houseImg}/>
+        </ImgContainer>
+        <VerifiedText>
+          <PlusText>PLUS</PlusText>
+          <BedText>{this.props.house.houseBeds}</BedText>
+        </VerifiedText>
+        <HouseName>{this.props.house.houseName}</HouseName>
+        <HousePrice>{this.props.house.housePrice}</HousePrice>
+        <NumberOfReviews>
+          <img src="/stars.png"/> {this.props.house.reviewCount}
+        </NumberOfReviews>
+      </HouseInfo>
     );
   }
 }
