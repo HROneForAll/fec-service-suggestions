@@ -17,7 +17,7 @@ class House extends React.Component {
     return (
       <HouseInfo >
         <ImgContainer>
-          <HeartPicture><img onClick={this.toggleModal} src='Red.png'/></HeartPicture>
+          <HeartPicture><img onClick={this.toggleModal} src='https://s3-us-west-1.amazonaws.com/picturesfec1/Heart.png'/></HeartPicture>
           <img id='roomPic' src={this.props.house.houseImg}/>
         </ImgContainer>
         <VerifiedText>
@@ -27,7 +27,7 @@ class House extends React.Component {
         <HouseName>{this.props.house.houseName}</HouseName>
         <HousePrice>{this.props.house.housePrice}</HousePrice>
         <NumberOfReviews>
-          <img src="/stars.png"/> {this.props.house.reviewCount}
+          <img src="https://s3-us-west-1.amazonaws.com/picturesfec1/stars.png"/> {this.props.house.reviewCount}
         </NumberOfReviews>
       </HouseInfo>
     );
