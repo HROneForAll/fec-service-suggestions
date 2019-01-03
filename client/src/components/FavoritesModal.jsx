@@ -35,15 +35,21 @@ class FavoritesModal extends React.Component {
           <CloseModal onClick={this.toggleModal}>&#x2715;</CloseModal>
           <div>
             <ModalHeader>Save to list</ModalHeader>
-            {this.props.state.showCreateList
-              ? <ModalAddList toggleCreateList={this.props.toggleCreateList} addFavoriteList={this.props.addFavoriteList}/>
-              : <CreateList onClick={this.props.toggleCreateList}>Create New List</CreateList>
-            }
-            {this.props.state.favoritesList.map((list, i) => 
-              <FavoriteListName key={i}>{list}</FavoriteListName>
-            )}
-              
+            <div>
+              {this.props.state.showCreateList
+                ? <ModalAddList toggleCreateList={this.props.toggleCreateList} addFavoriteList={this.props.addFavoriteList}/>
+                : <CreateList onClick={this.props.toggleCreateList}>Create New List</CreateList>
+              }
+            </div>
+            <div>
+              {this.props.state.favoritesList.map((list, i) => 
+                <FavoriteListName key={i}>{list}</FavoriteListName>
+              )}
+            </div>  
           </div>
+          <ModalFooter>
+            <p></p>
+          </ModalFooter>
         </ModalContent>  
       </Modal>
     );
