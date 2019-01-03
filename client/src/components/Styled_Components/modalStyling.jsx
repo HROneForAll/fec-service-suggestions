@@ -31,6 +31,7 @@ export const CreateList = styled.div`
   font-size: 16px;
   margin-left: 20px;
   margin-top: 40px;
+  margin-bottom: 25px;
   cursor: pointer;
   &:hover{
   	text-decoration: underline;
@@ -50,6 +51,9 @@ export const ListNameInput = styled.input`
   margin-left: 20px;
   margin-top: 20px;
   padding-left: 5px;
+  &:hover {
+    border: 1px solid rgb(178, 32, 80);
+  }
 `;
 
 export const CancelButton = styled.button`
@@ -62,6 +66,7 @@ export const CancelButton = styled.button`
   font-size: 16px;
   font-weight: bold;
   margin-top: 20px;
+  cursor: pointer;
 `;
 
 export const CreateButton = styled.button`
@@ -74,4 +79,11 @@ export const CreateButton = styled.button`
   font-size: 16px;
   font-weight: bold;
   margin: 20px 10px;
+`;
+
+export const FavoriteListName = styled.div`
+  width: 440px;
+  padding: 25px;
+  font-size: 16px;
+  border-top: 1px solid lightgrey;
 `;

@@ -27,7 +27,7 @@ for (var i = 1; i < 101; i++) {
         'min': 1, 
         'max': 4
       })),
-      houseName: capitalizeFirstLetter(faker.lorem.words(3)),
+      houseName: capitalizeFirstLetter(faker.lorem.words(5)),
       housePrice: `$${faker.commerce.price(75, 1000, 0)} per night`,
       houseStars: faker.random.number({
         'min': 1,
@@ -40,7 +40,6 @@ for (var i = 1; i < 101; i++) {
     });
   }
 }
-
 
 homes.forEach((home) => {
   db.saveHome(home);

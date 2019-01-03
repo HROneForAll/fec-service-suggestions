@@ -4,7 +4,7 @@ import HousesList from './HousesList.jsx';
 import FavoritesModal from './FavoritesModal.jsx';
 import { Container, Header, GlobalStyle } from './Styled_Components/styling.jsx';
 
-class App extends React.Component {
+class Suggestions extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -82,10 +82,11 @@ class App extends React.Component {
     this.getFavoritesList();
   }
 
+
   render() {
     return (
       <Container>
-        <FavoritesModal 
+        <FavoritesModal
           state={this.state} 
           toggleModal={this.toggleModal} 
           toggleCreateList={this.toggleCreateList}
@@ -99,4 +100,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default Suggestions;

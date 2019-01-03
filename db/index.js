@@ -11,7 +11,12 @@ let homeSchema = mongoose.Schema({
   suggestions: Object
 });
 
+let favoritesSchema = mongoose.Schema({
+  favorites: Object
+});
+
 let Home = mongoose.model('suggestions', homeSchema);
+let Favorite = mongoose.model('favorites', favoritesSchema);
 
 let saveHome = (obj) => {
   let newHome = new Home(obj);
@@ -31,7 +36,30 @@ let findHome = (homeID) => {
   });
 };
 
+let getFavorites = () => {
+  return new Promise((resolve, reject) => {
+    resolve(Favorite.find());
+  });
+};
+
+let createFavoriteList = (name) => {
+  let data = {
+    favorites: {}
+  };
+  data.favorites[name] = [];
+  let newFavorite = new Favorite(data);
+  newFavorite.save((err, res) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(res);
+    }
+  });
+};
+
 module.exports = {
   findHome,
-  saveHome
+  saveHome,
+  getFavorites,
+  createFavoriteList,
 };
