@@ -7,9 +7,15 @@ class FavoritesModal extends React.Component {
   constructor(props) {
     super(props);
     this.toggleModal = this.toggleModal.bind(this);
+    this.clickOutside = this.clickOutside.bind(this);
   }
   toggleModal() {
     this.props.toggleModal();
+  }
+  clickOutside(e) {
+    if (e.target.id === 'modal') {
+      this.props.toggleModal();
+    }
   }
   render() {
     const Modal = styled.div`
@@ -24,7 +30,7 @@ class FavoritesModal extends React.Component {
 			background-color: rgba(250, 250, 250, 0.8);
     `;
     return (
-      <Modal>
+      <Modal id="modal" onClick={this.clickOutside}>
         <ModalContent >
           <CloseModal onClick={this.toggleModal}>&#x2715;</CloseModal>
           <div>
