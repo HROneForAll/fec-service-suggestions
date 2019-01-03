@@ -1,4 +1,5 @@
 import React from 'react';
+import FavoritesModal from './FavoritesModal.jsx';
 import { 
   HouseInfo, VerifiedText, PlusText,
   BedText, HouseName, HousePrice, 
@@ -20,6 +21,13 @@ class House extends React.Component {
           <HeartPicture><img onClick={this.toggleModal} src='https://s3-us-west-1.amazonaws.com/picturesfec1/Heart.png'/></HeartPicture>
           <img id='roomPic' src={this.props.house.houseImg}/>
         </ImgContainer>
+        <FavoritesModal
+          state={this.props.state}
+          toggleModal={this.props.toggleModal}
+          toggleCreateList={this.props.toggleCreateList}
+          addFavoriteList={this.props.addFavoriteList}
+        >
+        </FavoritesModal>
         <VerifiedText>
           <PlusText>PLUS</PlusText>
           <BedText>{this.props.house.houseBeds}</BedText>

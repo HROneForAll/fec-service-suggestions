@@ -45,7 +45,7 @@ class Suggestions extends React.Component {
       });
   }
   getFavoritesList() {
-    axios.get('/favorites')
+    axios.get('/user/favorites')
       .then((data) => {
         let ListNames = [];
         data.data.forEach((list) => {
@@ -86,14 +86,14 @@ class Suggestions extends React.Component {
   render() {
     return (
       <Container>
-        <FavoritesModal
-          state={this.state} 
+        <Header>Other highly rated homes</Header>
+        <HousesList 
+          state={this.state}
+          toggleHomes={this.toggleMoreHomes} 
           toggleModal={this.toggleModal} 
           toggleCreateList={this.toggleCreateList}
-          addFavoriteList={this.addFavoriteList} 
-        />
-        <Header>Other highly rated homes</Header>
-        <HousesList toggleHomes={this.toggleMoreHomes} toggleModal={this.toggleModal} state={this.state}/>
+          addFavoriteList={this.addFavoriteList}
+        /> 
         <GlobalStyle />
       </Container>
     );
