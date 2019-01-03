@@ -2,20 +2,23 @@ import styled, { css, keyframes } from 'styled-components';
 
 export const ModalContent = styled.div`
   background-color: rgb(250,250,250);
-  margin: 20px auto;
-  padding: 20px;
+  margin: 50px auto;
+
+  height: 585px;
   width: 525px;
   font-family: Arial, sans-serif;
-  height: 82%;
   box-shadow: 0 5px 8px 0 rgba(0,0,0,0.2), 0 7px 20px 0 rgba(0,0,0,0.17);
 `;
 
-export const CloseModal = styled.div`
+export const CloseModal = styled.span`
   color: black;
   font-size: 24px;
-  padding-top: 20px;
-  margin-left: 20px;
+  padding: 3px 7px;
   cursor: pointer;
+  &:hover {
+    box-shadow: 0 0 3px rgba(0,0,0,0.4);
+    border-radius: 25px;
+  }
 `;
 
 export const ModalHeader = styled.header`
@@ -85,5 +88,13 @@ export const FavoriteListName = styled.div`
   width: 440px;
   padding: 25px;
   font-size: 16px;
+  color: rgba(0, 0, 0, 0.65);
   border-top: 1px solid lightgrey;
 `;
+
+export const ModalFooter = styled.div`
+  box-shadow: 0px -4px 10px rgba(50, 50, 50, 0.3);
+  position: fixed;
+  width: 525px;
+  top: 535px
+`
