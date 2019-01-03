@@ -21,15 +21,19 @@ class App extends React.Component {
       }],
       moreRevealed: false,
       showModal: false,
-      showCreateList: false
+      showCreateList: false,
+      favoritesList: []
     };
     this.toggleMoreHomes = this.toggleMoreHomes.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
-    this.toggleList = this.toggleList.bind(this);
+    this.toggleCreateList = this.toggleCreateList.bind(this);
+    this.addFavoriteList = this.addFavoriteList.bind(this);
+    this.getFavoritesList = this.getFavoritesList.bind(this);
   }
   
   componentDidMount() {
     this.getHomes(1); 
+    this.getFavoritesList();
   }
   getHomes(num) {
     axios.get(`/homes/${num}/suggestions`)
@@ -40,20 +44,53 @@ class App extends React.Component {
         console.log(error);
       });
   }
+  getFavoritesList() {
+    axios.get('/favorites')
+      .then((data) => {
+        let ListNames = [];
+        data.data.forEach((list) => {
+          ListNames.push(Object.keys(list.favorites));
+        });
+        this.setState({favoritesList: ListNames});
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
   toggleMoreHomes() {
     this.setState({moreRevealed: !this.state.moreRevealed});
   }
   toggleModal () {
     this.setState({showModal: !this.state.showModal});
+    if (this.state.showCreateList === true) {
+      this.toggleCreateList();
+    }
   }
-  toggleList () {
+  toggleCreateList () {
     this.setState({showCreateList: !this.state.showCreateList});
+  }
+
+  addFavoriteList (name) {
+    axios.post('/favorites', {
+      listName: name
+    })
+      .then(function(response) {
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+    this.getFavoritesList();
   }
 
   render() {
     return (
       <Container>
-        <FavoritesModal toggleModal={this.toggleModal} showModal={this.state.showModal} toggleList={this.toggleList} showCreateList={this.state.showCreateList}/>
+        <FavoritesModal 
+          state={this.state} 
+          toggleModal={this.toggleModal} 
+          toggleCreateList={this.toggleCreateList}
+          addFavoriteList={this.addFavoriteList} 
+        />
         <Header>Other highly rated homes</Header>
         <HousesList toggleHomes={this.toggleMoreHomes} toggleModal={this.toggleModal} state={this.state}/>
         <GlobalStyle />
