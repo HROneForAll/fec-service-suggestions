@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import HousesList from './HousesList.jsx';
-import FavoritesModal from './FavoritesModal.jsx';
+
 import { Container, Header, GlobalStyle } from './Styled_Components/styling.jsx';
 
 class Suggestions extends React.Component {
@@ -20,21 +20,19 @@ class Suggestions extends React.Component {
           }]
       }],
       moreRevealed: false,
-      showModal: false,
-      showCreateList: false,
       favoritesList: []
     };
     this.toggleMoreHomes = this.toggleMoreHomes.bind(this);
-    this.toggleModal = this.toggleModal.bind(this);
-    this.toggleCreateList = this.toggleCreateList.bind(this);
     this.addFavoriteList = this.addFavoriteList.bind(this);
     this.getFavoritesList = this.getFavoritesList.bind(this);
+    this.favoriteHome = this.favoriteHome.bind(this);
   }
   
   componentDidMount() {
     this.getHomes(1); 
     this.getFavoritesList();
   }
+
   getHomes(num) {
     axios.get(`/homes/${num}/suggestions`)
       .then((data) => {
@@ -44,12 +42,13 @@ class Suggestions extends React.Component {
         console.log(error);
       });
   }
+
   getFavoritesList() {
     axios.get('/user/favorites')
       .then((data) => {
         let ListNames = [];
         data.data.forEach((list) => {
-          ListNames.push(Object.keys(list.favorites));
+          ListNames.push(list.favorites);
         });
         this.setState({favoritesList: ListNames});
       })
@@ -57,29 +56,24 @@ class Suggestions extends React.Component {
         console.log(error);
       });
   }
+
   toggleMoreHomes() {
     this.setState({moreRevealed: !this.state.moreRevealed});
   }
-  toggleModal () {
-    this.setState({showModal: !this.state.showModal});
-    if (this.state.showCreateList === true) {
-      this.toggleCreateList();
-    }
-  }
-  toggleCreateList () {
-    this.setState({showCreateList: !this.state.showCreateList});
-  }
 
   addFavoriteList (name) {
-    axios.post('/favorites', {
+    axios.post('/user/favorites', {
       listName: name
     })
-      .then(function(response) {
+      .then((response) => {
+        this.getFavoritesList();
       })
-      .catch(function(error) {
+      .catch((error) => {
         console.log(error);
       });
-    this.getFavoritesList();
+  }
+  favoriteHome(text) {
+    console.log('stillTesting');
   }
 
 
@@ -90,9 +84,9 @@ class Suggestions extends React.Component {
         <HousesList 
           state={this.state}
           toggleHomes={this.toggleMoreHomes} 
-          toggleModal={this.toggleModal} 
           toggleCreateList={this.toggleCreateList}
           addFavoriteList={this.addFavoriteList}
+          favoriteHome={this.favoriteHome}
         /> 
         <GlobalStyle />
       </Container>
