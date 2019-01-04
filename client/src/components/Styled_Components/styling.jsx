@@ -8,10 +8,10 @@ export const GlobalStyle = createGlobalStyle`
 
 export const Container = styled.div`
   background-color: rgb(245, 245, 245);
-  height: 100%;
-  width: 75%;
-  top: 0;
-  left: 0;
+  height: 90vh;
+  width: 1000px;
+  display: block;
+
   margin: 0 auto;
 `;
 
@@ -24,11 +24,12 @@ export const Header = styled.h1`
 
 export const HousingList = styled.div`
   display: flex;
+  margin-top: 20px;
 `;
 
 export const ImgContainer = styled.div`
 	position: relative;
-	width: 50%;
+
 `;
 
 export const HeartPicture = styled.div`
@@ -38,8 +39,9 @@ export const HeartPicture = styled.div`
 `;
 
 export const HouseInfo = styled.div`
-  margin : 10px;
   color: black;
+  margin-right: 20px;
+  width: 240px;
   text-decoration: none;
   cursor: pointer;
   font-family: Arial, Helvetica, sans-serif;

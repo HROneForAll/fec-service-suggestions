@@ -1,6 +1,6 @@
 import React from 'react';
 import House from './House.jsx';
-import { HousingList, ShowMoreHomes } from './Styled_Components/styling.jsx';
+import { HousingList, Header, ShowMoreHomes } from './Styled_Components/styling.jsx';
 
 
 class HousesList extends React.Component {
@@ -15,16 +15,37 @@ class HousesList extends React.Component {
       <div>
         <HousingList>
           {this.props.state.houses[0].suggestions.slice(0, 4).map((house, index) => 
-            <House house={house} key={index} toggleModal={this.props.toggleModal}/>
+            <House 
+              house={house} 
+              key={index}
+              state={this.props.state}
+              toggleCreateList={this.props.toggleCreateList}
+              addFavoriteList={this.props.addFavoriteList}
+              favoriteHome = {this.props.favoriteHome}
+            />
           )}
         </HousingList>
         {this.props.state.moreRevealed 
           ? <div>
             <HousingList>{this.props.state.houses[0].suggestions.slice(4, 8).map((house, index) => 
-              <House house={house} key={index}/>)}
+              <House 
+                house={house} 
+                key={index}
+                state={this.props.state}
+                toggleModal={this.props.toggleModal}
+                toggleCreateList={this.props.toggleCreateList}
+                addFavoriteList={this.props.addFavoriteList}
+              />)}
             </HousingList>
             <HousingList>{this.props.state.houses[0].suggestions.slice(8, 12).map((house, index) => 
-              <House house={house} key={index}/>)}
+              <House 
+                house={house} 
+                key={index}
+                state={this.props.state}
+                toggleModal={this.props.toggleModal}
+                toggleCreateList={this.props.toggleCreateList}
+                addFavoriteList={this.props.addFavoriteList}
+              />)}
             </HousingList>
           </div>
           : 

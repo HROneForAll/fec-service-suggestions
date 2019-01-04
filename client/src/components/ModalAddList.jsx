@@ -22,9 +22,14 @@ class ModalAddList extends React.Component {
     return (
       <div>
         <AddList>Name</AddList>
-        <ListNameInput type="text" id="listName" placeholder="Name your list" onChange={this.handleChange}/>
+        <ListNameInput 
+          type="text" 
+          id="listName" 
+          placeholder="Name your list" 
+          onChange={this.handleChange}
+        />
+        <CancelButton onClick={this.props.toggleListForm}>Cancel</CancelButton>
         <CreateButton onClick={this.handleSubmit}>Create</CreateButton>
-        <CancelButton onClick={this.props.toggleCreateList}>Cancel</CancelButton>
       </div>
     );
   }

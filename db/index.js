@@ -29,7 +29,6 @@ let saveHome = (obj) => {
   });
 };
 
-
 let findHome = (homeID) => {
   return new Promise((resolve, reject) => {
     resolve(Home.find({id: homeID}));
@@ -51,8 +50,6 @@ let createFavoriteList = (name) => {
   newFavorite.save((err, res) => {
     if (err) {
       console.log(err);
-    } else {
-      console.log(res);
     }
   });
 };

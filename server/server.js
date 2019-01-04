@@ -16,7 +16,7 @@ app.get('/homes/:id/suggestions', function(req, res) {
     });
 });
 
-app.get('/favorites', function(req, res) {
+app.get('/user/favorites', function(req, res) {
   db.getFavorites()
     .then((results) => {
       res.status(200).send(results);
@@ -25,7 +25,7 @@ app.get('/favorites', function(req, res) {
     });
 });
 
-app.post('/favorites', function(req, res) {
+app.post('/user/favorites', function(req, res) {
   let listName = req.body.listName;
   db.createFavoriteList(listName);
   res.status(201).send('List Added');
