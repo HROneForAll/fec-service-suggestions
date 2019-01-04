@@ -9,10 +9,31 @@ import {
 class House extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      showModal: false,
+      showListForm: false,
+      isFavorited: {}
+    };
     this.toggleModal = this.toggleModal.bind(this);
+    this.toggleListForm = this.toggleListForm.bind(this);
+    this.addToFavorited = this.addToFavorited.bind(this);
   }
   toggleModal () {
-    this.props.toggleModal();
+    this.setState({showModal: !this.state.showModal});
+    if (this.state.showListForm === true) {
+      this.setState({showListForm: !this.state.showListForm});
+    }
+  }
+  toggleListForm() {
+    this.setState({showListForm: !this.state.showListForm});
+  }
+  addToFavorited () {
+    // let FavoritesList = this.state.isFavorited;
+
+    // FavoritesList[key] = listName;
+    // console.log(FavoritesList)
+
+    console.log('workingOnThis');
   }
   render() {
     return (
@@ -23,9 +44,14 @@ class House extends React.Component {
         </ImgContainer>
         <FavoritesModal
           state={this.props.state}
-          toggleModal={this.props.toggleModal}
+          houseState={this.state}
+          house={this.props.house}
+          toggleModal={this.toggleModal}
+          toggleListForm={this.toggleListForm}
           toggleCreateList={this.props.toggleCreateList}
           addFavoriteList={this.props.addFavoriteList}
+          favoriteHome={this.props.favoriteHome}
+          addToFavorited={this.addToFavorited}
         >
         </FavoritesModal>
         <VerifiedText>

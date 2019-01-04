@@ -1,6 +1,6 @@
 import React from 'react';
 import House from './House.jsx';
-import { HousingList, ShowMoreHomes } from './Styled_Components/styling.jsx';
+import { HousingList, Header, ShowMoreHomes } from './Styled_Components/styling.jsx';
 
 
 class HousesList extends React.Component {
@@ -19,9 +19,9 @@ class HousesList extends React.Component {
               house={house} 
               key={index}
               state={this.props.state}
-              toggleModal={this.props.toggleModal}
               toggleCreateList={this.props.toggleCreateList}
               addFavoriteList={this.props.addFavoriteList}
+              favoriteHome = {this.props.favoriteHome}
             />
           )}
         </HousingList>
