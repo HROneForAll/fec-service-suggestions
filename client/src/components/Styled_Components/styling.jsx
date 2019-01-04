@@ -9,9 +9,9 @@ export const GlobalStyle = createGlobalStyle`
 export const Container = styled.div`
   background-color: rgb(245, 245, 245);
   height: 90vh;
-  width: 75%;
-  top: 0;
-  left: 0;
+  width: 1000px;
+  display: block;
+
   margin: 0 auto;
 `;
 
