@@ -19,20 +19,18 @@ for (var i = 1; i < 101; i++) {
     id: i,
     suggestions: []
   });
-  for (var j = 0; j < Math.floor(Math.random() * 100) + 12; j++) {
+  for (var j = 1; j < Math.floor(Math.random() * 100) + 12; j++) {
     homes[i - 1].suggestions.push({
-      suggestionId: j + 1,
-      houseImg: `http://lorempixel.com/240/160/city/${j}`,
+      suggestionId: j,
+      houseImg: `http://lorempixel.com/240/160/city/${j % 10}`,
+      houseImgMini: `http://lorempixel.com/108/72/city/${j % 10}`,
       houseBeds: numberOfBeds(faker.random.number({
         'min': 1, 
         'max': 4
       })),
+      houseLocation: faker.address.city() + ', ' + faker.address.stateAbbr() + ', ' + faker.address.country(),
       houseName: capitalizeFirstLetter(faker.lorem.words(5)),
       housePrice: `$${faker.commerce.price(75, 1000, 0)} per night`,
-      houseStars: faker.random.number({
-        'min': 1,
-        'max': 5
-      }),
       reviewCount: faker.random.number({
         'min': 1,
         'max': 500
