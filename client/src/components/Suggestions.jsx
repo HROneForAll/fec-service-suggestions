@@ -1,23 +1,15 @@
 import React from 'react';
 import axios from 'axios';
 import HousesList from './HousesList.jsx';
-
 import { Container, Header, GlobalStyle } from './Styled_Components/styling.jsx';
 
 class Suggestions extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      houses: [{id: 100,
-        suggestions:
-          [{ suggestionId: 1,
-            houseImg: 'http://lorempixel.com/240/160/city/100',
-            houseBeds: 'VERIFIED - 2 BEDS',
-            houseName: 'Corrupti Facere Facere',
-            housePrice: '$257 per night',
-            houseStars: 2,
-            reviewCount: 257 
-          }]
+      houses: [{
+        id: 0,
+        suggestions:[]
       }],
       moreRevealed: false,
       favoritesList: []
