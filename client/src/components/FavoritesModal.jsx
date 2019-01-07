@@ -1,57 +1,46 @@
 import React from 'react';
-import styled, { css, keyframes } from 'styled-components';
-import { 
-  ModalContent, CloseModal, ModalHeader, ModalFooter, 
-  CreateList, FavoriteListName, HouseNameFooter, ReviewsTextFooter,
-  FooterImg, HouseLocationFooter, StarsImgFooter, ListHeart } from './Styled_Components/modalStyling.jsx';
 import ModalAddList from './ModalAddList.jsx';
+import styled, { css } from 'styled-components';
+import { 
+  Modal, ModalContent, CloseModal, ModalHeader, CreateList, 
+  FavoriteListName, ListHeart, ModalFooter, HouseNameFooter, 
+  FooterImg, HouseLocationFooter, StarsImgFooter, ReviewsTextFooter } from './Styled_Components/modalStyling.jsx';
 
 class FavoritesModal extends React.Component {
   constructor(props) {
     super(props);
-    this.toggleModal = this.toggleModal.bind(this);
     this.clickOutside = this.clickOutside.bind(this);
     this.checkIfFavorite = this.checkIfFavorite.bind(this);
-    this.addToFavorited = this.addToFavorited.bind(this);
-  }
-  toggleModal() {
-    this.props.toggleModal();
+    this.addHomeToList = this.addHomeToList.bind(this);
+    this.removeHomeFromList = this.removeHomeFromList.bind(this);
   }
 
   clickOutside(e) {
     if (e.target.id === 'modal') {
-      this.toggleModal();
+      this.props.toggleModal();
     }
   }
   checkIfFavorite(list, i) {
     let listName = Object.keys(list)[0];
-
-
     if (this.props.state.favoritesList[i][listName] && this.props.state.favoritesList[i][listName].includes(this.props.house.houseName)) {
       return true;
     } else { 
       return false;
     }
   }
-  addToFavorited() {
-    this.props.addToFavorited();
+  addHomeToList(e) {
+    this.props.addToFavorited(e.target.id, e.target.getAttribute('name'));
   }
+
+  removeHomeFromList(e) {
+    this.props.removeFromFavorited(e.target.id, e.target.getAttribute('name'));
+  }
+
   render() {
-    const Modal = styled.div`
-			display: ${this.props.houseState.showModal ? 'block' : 'none'};
-			position: fixed;
-			z-index: 1;
-			left: 0;
-			top: 0;
-			height: 100%;
-			width: 100%;
-			overflow: auto;
-			background-color: rgba(250, 250, 250, 0.8);
-    `;
     return (
-      <Modal id="modal" onClick={this.clickOutside}>
+      <Modal id="modal" houseState={this.props.houseState} onClick={this.clickOutside}>
         <ModalContent >
-          <CloseModal onClick={this.toggleModal}>&#x2715;</CloseModal>
+          <CloseModal onClick={this.props.toggleModal}>&#x2715;</CloseModal>
           <div>
             <ModalHeader>Save to list</ModalHeader>
             <div>
@@ -62,16 +51,16 @@ class FavoritesModal extends React.Component {
             </div>
             <div>
               {this.props.state.favoritesList.map((list, i) => 
-                <FavoriteListName key={i}>
-                  {Object.keys(list)[0]}
+                <div key={i}>
                   {this.checkIfFavorite(list, i)
-                    ? <ListHeart onClick={() => { console.log(this.props.house.reviewCount); } } src="RedListHeart.png"/>
-                    : <ListHeart onClick={this.addToFavorited} src="https://s3-us-west-1.amazonaws.com/picturesfec1/ListHeart.png"/>
-
-
-                  }
-                  
-                </FavoriteListName>
+                    ? <FavoriteListName id={Object.keys(list)[0]} name={this.props.house.houseName} onClick={this.removeHomeFromList}>
+                      {Object.keys(list)[0]}<ListHeart id={Object.keys(list)[0]} name={this.props.house.houseName} onClick={this.removeHomeFromList} src="https://s3-us-west-1.amazonaws.com/picturesfec1/RedListHeart.png"/>
+                    </FavoriteListName>
+                    : <FavoriteListName id={Object.keys(list)[0]} name={this.props.house.houseName} onClick={this.addHomeToList}>
+                      {Object.keys(list)[0]}<ListHeart id={Object.keys(list)[0]} name={this.props.house.houseName} onClick={this.addHomeToList} src="https://s3-us-west-1.amazonaws.com/picturesfec1/ListHeart.png"/>
+                    </FavoriteListName>
+                  }  
+                </div>
               )}
             </div>  
           </div>
