@@ -1,5 +1,18 @@
 import styled, { css, keyframes } from 'styled-components';
 
+export const Modal = styled.div`
+  display: ${props => props.houseState.showModal ? 'block' : 'none'};
+  position: fixed;
+  z-index: 5;
+  left: 0;
+  top: 0;
+  cursor: default;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  background-color: rgba(250, 250, 250, 0.8);
+`;
+
 export const ModalContent = styled.div`
   background-color: rgb(255,255,255);
   position: relative;
@@ -7,6 +20,7 @@ export const ModalContent = styled.div`
   height: 610px;
   width: 565px;
   font-family: Arial, sans-serif;
+  overflow: auto;
   box-shadow: 0 5px 8px 0 rgba(0,0,0,0.2), 0 7px 20px 0 rgba(0,0,0,0.17);
 `;
 
@@ -35,6 +49,7 @@ export const ModalHeader = styled.header`
 export const CreateList = styled.div`
   color: rgb(178, 32, 80);
   font-size: 16px;
+  width: 125px;
   margin-left: 25px;
   margin-top: 40px;
   margin-bottom: 25px;
@@ -57,9 +72,11 @@ export const ListNameInput = styled.input`
   font-size: 16px;
   margin-left: 20px;
   margin-top: 20px;
-  padding-left: 5px;
-  &:hover {
-    border: 1px solid rgb(178, 32, 80);
+  padding-left: 10px;
+  border: 1px solid rgb(178, 32, 80);
+  border-radius: 5px;
+  &:focus {
+    outline: none;
   }
 `;
 
@@ -89,6 +106,7 @@ export const CreateButton = styled.button`
 
 export const FavoriteListName = styled.div`
   width: 500px;
+  cursor: pointer;
   margin-left: 25px;
   padding: 25px 0px;
   font-size: 16px;
@@ -148,5 +166,5 @@ export const ReviewsTextFooter = styled.div`
 export const ListHeart = styled.img`
   float: right;
   clear: right;
-  margin-top: -4px
+  margin-top: -4px;
 `;
