@@ -22,8 +22,8 @@ for (var i = 1; i < 101; i++) {
   for (var j = 1; j < Math.floor(Math.random() * 100) + 12; j++) {
     homes[i - 1].suggestions.push({
       suggestionId: j,
-      houseImg: `http://lorempixel.com/240/160/city/${j % 10}`,
-      houseImgMini: `http://lorempixel.com/108/72/city/${j % 10}`,
+      houseImg: `https://s3-us-west-1.amazonaws.com/fec-project-houses/house${j}.jpeg`,
+      houseImgMini: `https://s3-us-west-1.amazonaws.com/fec-project-houses-mini/House${j}.jpg`,
       houseBeds: numberOfBeds(faker.random.number({
         'min': 1, 
         'max': 4

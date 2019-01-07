@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-// mongoose.connect('mongodb://172.17.0.2/airBNB');
-mongoose.connect('mongodb://localhost/airBNB');
+mongoose.connect('mongodb://172.17.0.2/airBNB');
+// mongoose.connect('mongodb://localhost/airBNB');
 
 let homeSchema = mongoose.Schema({
   id: {
@@ -22,11 +22,7 @@ let Favorite = mongoose.model('favorites', favoritesSchema);
 let saveHome = (obj) => {
   let newHome = new Home(obj);
   newHome.save((err, res) => {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log(res);
-    }
+    if (err) { console.log(err); }
   });
 };
 
@@ -42,22 +38,37 @@ let getFavorites = () => {
   });
 };
 
-let createFavoriteList = (name) => {
+let createFavoriteList = (name, callback) => {
   let data = {
     favorites: {}
   };
   data.favorites[name] = [];
   let newFavorite = new Favorite(data);
   newFavorite.save((err, res) => {
-    if (err) {
-      console.log(err);
-    }
+    if (err) { console.log(err); }
+    callback();
+  });
+};
+
+let updateFavorite = (listName, oldList, updatedList, callback) => {
+  let searchDatabase = {
+    favorites: {}
+  };
+  searchDatabase.favorites[listName] = oldList;
+  let updateDatabase = {
+    favorites: {}
+  };
+  updateDatabase.favorites[listName] = updatedList;
+  Favorite.update(searchDatabase, updateDatabase, (err, res) => {
+    if (err) { console.log('Error ', err); }
+    callback(null);
   });
 };
 
 module.exports = {
-  findHome,
   saveHome,
+  findHome,
   getFavorites,
   createFavoriteList,
+  updateFavorite
 };
