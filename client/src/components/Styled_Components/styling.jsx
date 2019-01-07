@@ -2,16 +2,14 @@ import styled, { css, keyframes, createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
   body {
-    background-color: rgb(245,245,245);
+    background-color: white;
   }
 `;
 
 export const Container = styled.div`
-  background-color: rgb(245, 245, 245);
   height: 90vh;
   width: 1000px;
   display: block;
-
   margin: 0 auto;
 `;
 
@@ -20,22 +18,27 @@ export const Header = styled.h1`
   color: rgba(0, 0, 0, 0.75);
   font-size: 36px;
   letter-spacing: 0.5px;
+  margin-bottom: 40px;
+`;
+
+export const HousesListCss = styled.div`
+  width: 1020px;
 `;
 
 export const HousingList = styled.div`
   display: flex;
-  margin-top: 20px;
+  margin-top: 1px;
 `;
 
 export const ImgContainer = styled.div`
-	position: relative;
-
+  z-index: 0;
 `;
 
 export const HeartPicture = styled.div`
-  position: absolute;
+  position: relative;
   left: 190px;
-	top: 20px;  
+	top: 50px;  
+  z-index: 1;
 `;
 
 export const HouseInfo = styled.div`
@@ -81,6 +84,10 @@ export const HousePrice = styled.div`
   letter-spacing: 0.15px;
 `;
 
+export const ReviewStars = styled.img`
+  margin-right: 2px;
+`;
+
 export const NumberOfReviews = styled.div`
   font-size: 12px;
 `;
@@ -89,6 +96,11 @@ export const ShowMoreHomes = styled.div`
   color: rgb(178, 32, 80);
   font-family: Arial, Helvetica, sans-serif;
   font-size: 16px;
-  margin-top: 10px;
+  margin-top: 25px;
   cursor: pointer;
+`;
+
+export const BottomPadding = styled.div`
+  height: 200px;
+  width:auto;
 `;

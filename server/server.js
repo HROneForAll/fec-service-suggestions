@@ -27,8 +27,19 @@ app.get('/user/favorites', function(req, res) {
 
 app.post('/user/favorites', function(req, res) {
   let listName = req.body.listName;
-  db.createFavoriteList(listName);
-  res.status(201).send('List Added');
+  db.createFavoriteList(listName, () => {
+    res.status(201).send('List Added');
+  });
+});
+
+app.put('/user/updateFavorite', function(req, res) {
+  let listName = req.body.listName;
+  let oldList = req.body.oldList;
+  let updatedList = req.body.favList;
+
+  db.updateFavorite(listName, oldList, updatedList, () => {
+    res.status(201).send('List Updated');
+  });
 });
 
 const port = 3050;

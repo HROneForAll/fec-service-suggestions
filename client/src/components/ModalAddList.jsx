@@ -7,15 +7,16 @@ class ModalAddList extends React.Component {
     this.state = {
       listName: ''
     };
-    this.handleChange = this.handleChange.bind(this);
+    this.handleNameChange = this.handleNameChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-  handleChange(e) {
+  handleNameChange(e) {
     this.setState({[e.target.id]: e.target.value});
   }
   handleSubmit(e) {
     e.preventDefault();
     this.props.addFavoriteList(this.state.listName);
+    this.setState({listName: ''});
   }
 
   render() {
@@ -25,8 +26,9 @@ class ModalAddList extends React.Component {
         <ListNameInput 
           type="text" 
           id="listName" 
+          value={this.state.listName}
           placeholder="Name your list" 
-          onChange={this.handleChange}
+          onChange={this.handleNameChange}
         />
         <CancelButton onClick={this.props.toggleListForm}>Cancel</CancelButton>
         <CreateButton onClick={this.handleSubmit}>Create</CreateButton>

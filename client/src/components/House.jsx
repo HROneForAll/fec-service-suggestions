@@ -1,10 +1,9 @@
 import React from 'react';
 import FavoritesModal from './FavoritesModal.jsx';
 import { 
-  HouseInfo, VerifiedText, PlusText,
-  BedText, HouseName, HousePrice, 
-  NumberOfReviews, ImgContainer, HeartPicture 
-} from './Styled_Components/styling.jsx';
+  HouseInfo, ImgContainer, PlusText,
+  BedText, VerifiedText, HouseName, HousePrice, 
+  ReviewStars, NumberOfReviews, HeartPicture } from './Styled_Components/styling.jsx';
 
 class House extends React.Component {
   constructor(props) {
@@ -12,35 +11,45 @@ class House extends React.Component {
     this.state = {
       showModal: false,
       showListForm: false,
-      isFavorited: {}
     };
     this.toggleModal = this.toggleModal.bind(this);
     this.toggleListForm = this.toggleListForm.bind(this);
-    this.addToFavorited = this.addToFavorited.bind(this);
+    this.checkFavorite = this.checkFavorite.bind(this);
   }
+  
   toggleModal () {
     this.setState({showModal: !this.state.showModal});
     if (this.state.showListForm === true) {
       this.setState({showListForm: !this.state.showListForm});
     }
   }
+
   toggleListForm() {
     this.setState({showListForm: !this.state.showListForm});
   }
-  addToFavorited () {
-    // let FavoritesList = this.state.isFavorited;
 
-    // FavoritesList[key] = listName;
-    // console.log(FavoritesList)
-
-    console.log('workingOnThis');
+  checkFavorite () {
+    let isFavorite = false;
+    let favList = this.props.state.favoritesList;
+    for (var i = 0; i < favList.length; i++) {
+      let favKey = Object.keys(favList[i])[0];
+      if (favList[i][favKey] && favList[i][favKey].includes(this.props.house.houseName)) {
+        isFavorite = true;
+      }
+    }
+    return isFavorite;
   }
+
   render() {
     return (
       <HouseInfo >
         <ImgContainer>
-          <HeartPicture><img onClick={this.toggleModal} src='https://s3-us-west-1.amazonaws.com/picturesfec1/Heart.png'/></HeartPicture>
-          <img id='roomPic' src={this.props.house.houseImg}/>
+          <HeartPicture>
+            <img onClick={this.toggleModal} src={this.checkFavorite() 
+              ? 'https://s3-us-west-1.amazonaws.com/picturesfec1/MainRedHeart.png' 
+              : 'https://s3-us-west-1.amazonaws.com/picturesfec1/Heart.png'}/>
+          </HeartPicture>
+          <img src={this.props.house.houseImg}/>
         </ImgContainer>
         <FavoritesModal
           state={this.props.state}
@@ -48,10 +57,9 @@ class House extends React.Component {
           house={this.props.house}
           toggleModal={this.toggleModal}
           toggleListForm={this.toggleListForm}
-          toggleCreateList={this.props.toggleCreateList}
           addFavoriteList={this.props.addFavoriteList}
-          favoriteHome={this.props.favoriteHome}
-          addToFavorited={this.addToFavorited}
+          addToFavorited={this.props.addToFavorited}
+          removeFromFavorited={this.props.removeFromFavorited}
         >
         </FavoritesModal>
         <VerifiedText>
@@ -61,7 +69,8 @@ class House extends React.Component {
         <HouseName>{this.props.house.houseName}</HouseName>
         <HousePrice>{this.props.house.housePrice}</HousePrice>
         <NumberOfReviews>
-          <img src="https://s3-us-west-1.amazonaws.com/picturesfec1/stars.png"/> {this.props.house.reviewCount}
+          <ReviewStars src="https://s3-us-west-1.amazonaws.com/picturesfec1/stars.png"/>
+          {this.props.house.reviewCount}
         </NumberOfReviews>
       </HouseInfo>
     );
