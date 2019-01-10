@@ -43,3 +43,25 @@ npm install -g webpack
 npm install
 ```
 
+## CRUD Operations
+
+- Create
+  * HTTP method: POST
+  * Route URL: /user/favorites
+  * Description: Save new suggestion to suggestions db
+
+- Read
+  * HTTP method: GET
+  * Route URL: /homes/:id/suggestions
+  * Description: Retrieve suggestions from database
+
+- Update
+  * HTTP method: PUT
+  * Route URL: /user/updateFavorite
+  * Description: Update suggestions in suggestions db
+
+- Delete
+  * HTTP method: DELETE
+  * Route URL: /homes/:id/suggestions
+  * Description: Remove suggested link in db 
+
