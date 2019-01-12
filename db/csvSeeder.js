@@ -1,6 +1,6 @@
 const faker = require('faker');
 const fs = require('fs');
-const FILES_TO_GENERATE = 3;
+const FILES_TO_GENERATE = 2;
 
 
 /*          -------------------- HELPERS --------------------          */
@@ -64,48 +64,37 @@ const generateCsvRow = () => {
 
 // -------------------- BEGIN SEED SCRIPT -------------------- //
 
-const generateReviewsCsv = (numberOfFiles) => {
-  const headers = ['id', 'home_image', 'home_thumbnail_img', 'home_beds', 'city',
-    'state', 'country', 'house_name', 'house_price', 'reviews'];
+const headers = ['id', 'home_image', 'home_thumbnail_img', 'home_beds', 'city',
+  'state', 'country', 'house_name', 'house_price', 'reviews'];
 
-  let i = 0;
-  let maxNumberOfRows = 50;
-  var writeStream = fs.createWriteStream(`seedFile${i}.csv`);
+const generateCsv = (stream) => {
 
-  const writeToFile = (stream, rowsWritten) => {
+  // let totalCount = 500000
+  let i = 100000;
+  write();
 
-    const writeRow = () => {
-      let canContinueStream = true;
+  function write() {
+    let canContinue = true;
+    do {
+      i--;
+      if (i === 0) {
+        stream.write(generateCsvRow());
+      } else {
 
-      stream.write(headers.join() + '\n');
-    }
-
-
-
-    for (let j = 0; j < numberOfFiles; j++) {
-      let canContinueStream = true;
-
-      stream.write(headers.join() + '\n');
-      if (rowsWritten >= maxNumberOfRows) {
-        return;
+        canContinue = stream.write(generateCsvRow());
       }
-      //Never getting reset - always showing false
-      //.write method returns true/false
-      canContinueStream = stream.write(generateCsvRow());
-
-      if (canContinueStream) {
-        // console.log('Rows written: ', rowsWritten);
-        writeToFile(stream, rowsWritten + 1);
-      }
-      i++;
-    }
-    if (maxNumberOfRows > 0) {
-      stream.once('drain', () => {
-        writeToFile(stream, rowsWritten + 1);
-      })
+    } while (i > 0 && canContinue);
+    if (i > 0) {
+      stream.once('drain', () => write());
     }
   }
-  writeToFile(writeStream, 0)
 }
 
-generateReviewsCsv(FILES_TO_GENERATE);
+for (i = 0; i < FILES_TO_GENERATE; i++) {
+  const suggestionStream = fs.createWriteStream(`suggestionCsv${i}.csv`, { flags: 'w' });
+  suggestionStream.write(headers.join() + '\n');
+  generateCsv(suggestionStream)
+}
+
+
+
