@@ -1,6 +1,7 @@
 const faker = require('faker');
 const fs = require('fs');
-const FILES_TO_GENERATE = 2;
+const FILES_TO_GENERATE = 3;
+
 
 /*          -------------------- HELPERS --------------------          */
 
@@ -67,41 +68,44 @@ const generateReviewsCsv = (numberOfFiles) => {
   const headers = ['id', 'home_image', 'home_thumbnail_img', 'home_beds', 'city',
     'state', 'country', 'house_name', 'house_price', 'reviews'];
 
+  let i = 0;
+  let maxNumberOfRows = 50;
+  var writeStream = fs.createWriteStream(`seedFile${i}.csv`);
 
-  //rowsWritten is being overridden. Should be consecutive
-  let rowsWritten = 0;
-  let maxNumberOfRows = 5;
+  const writeToFile = (stream, rowsWritten) => {
 
-  //Keep track of rows to write and total max number of rows
-  //csv generation
-  const writeToFile = (rowsWritten, stream) => {
+    const writeRow = () => {
+      let canContinueStream = true;
 
-    let canContinueStream = stream.write(generateCsvRow());
+      stream.write(headers.join() + '\n');
+    }
 
-    if (rowsWritten === maxNumberOfRows) { return; }
-    if (canContinueStream) {
 
-      console.log('Rows written: ', rowsWritten);
-      writeToFile(rowsWritten + 1, stream)
-    } else {
-      stream.on('drain', () => {
-        writeToFile(rowsWritten + 1, stream)
-      });
+
+    for (let j = 0; j < numberOfFiles; j++) {
+      let canContinueStream = true;
+
+      stream.write(headers.join() + '\n');
+      if (rowsWritten >= maxNumberOfRows) {
+        return;
+      }
+      //Never getting reset - always showing false
+      //.write method returns true/false
+      canContinueStream = stream.write(generateCsvRow());
+
+      if (canContinueStream) {
+        // console.log('Rows written: ', rowsWritten);
+        writeToFile(stream, rowsWritten + 1);
+      }
+      i++;
+    }
+    if (maxNumberOfRows > 0) {
+      stream.once('drain', () => {
+        writeToFile(stream, rowsWritten + 1);
+      })
     }
   }
-
-  //Generates a file
-  for (let i = 0; i < numberOfFiles; i++) {
-    const writeStream = fs.createWriteStream(`seedFile${i}.csv`);
-    writeStream.write(headers.join() + '\n');
-
-    writeToFile(0, writeStream);
-  }
+  writeToFile(writeStream, 0)
 }
 
 generateReviewsCsv(FILES_TO_GENERATE);
-
-
-//2 files to generate
-//Makes the headers, keeps track of rowsWritten, and the max number of rows
-  //Inner function takes in a number of rows 
